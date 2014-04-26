@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class KinematicBody : MonoBehaviour {
+    public Vector3 velocity;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public enum FacingDirection { UP, RIGHT, DOWN, LEFT };
+    public FacingDirection facingDirection = FacingDirection.RIGHT;
+
+    void Update()
+    {
+        transform.position += velocity * Time.deltaTime;
+    }
 }
