@@ -7,6 +7,11 @@ public class DayManager : MonoBehaviour {
     public static void GotoNextDay()
     {
         currentDay++;
+        Application.LoadLevel("overnight");
+    }
+
+    public static void LoadDay()
+    {
         Application.LoadLevel("day" + currentDay);
     }
 }
