@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
     public float moveSpeed = 2f;
+    public bool freezeInput = false;
 
     private KinematicBody body;
 
@@ -13,6 +14,12 @@ public class PlayerControl : MonoBehaviour {
 
     void Update()
     {
+        if (freezeInput)
+        {
+            body.velocity = Vector3.zero;
+            return;
+        }
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
             body.velocity.y = moveSpeed;
