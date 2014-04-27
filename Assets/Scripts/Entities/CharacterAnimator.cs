@@ -34,7 +34,7 @@ public class CharacterAnimator : MonoBehaviour {
 
             case KinematicBody.FacingDirection.RIGHT:
                 animationBase = 3;
-                SetFlip(false);
+                costumeBuilder.SetFlip(false);
                 break;
 
             case KinematicBody.FacingDirection.DOWN:
@@ -43,7 +43,7 @@ public class CharacterAnimator : MonoBehaviour {
 
             case KinematicBody.FacingDirection.LEFT:
                 animationBase = 3;
-                SetFlip(true);
+                costumeBuilder.SetFlip(true);
                 break;
         }
 
@@ -81,12 +81,5 @@ public class CharacterAnimator : MonoBehaviour {
         }
 
         animationFrame = animationBase + animationOffset;
-    }
-
-    public void SetFlip(bool left)
-    {
-        costumeBuilder.clothesSprite.FlipX = left;
-        costumeBuilder.skinSprite.FlipX = left;
-        costumeBuilder.hairSprite.FlipX = left;
     }
 }

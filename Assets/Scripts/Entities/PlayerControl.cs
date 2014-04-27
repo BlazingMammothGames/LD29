@@ -23,7 +23,9 @@ public class PlayerControl : MonoBehaviour {
             body.velocity.y = -moveSpeed;
             body.facingDirection = KinematicBody.FacingDirection.DOWN;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else
+            body.velocity.y = 0;
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             body.velocity.x = -moveSpeed;
             body.facingDirection = KinematicBody.FacingDirection.LEFT;
@@ -35,5 +37,12 @@ public class PlayerControl : MonoBehaviour {
         }
         else
             body.velocity.x = 0;
+
+        // limit the speed diagonally
+        if (body.velocity.x != 0 && body.velocity.y != 0)
+        {
+            body.velocity.x *= 0.70710678118654752440084436210485f;
+            body.velocity.y *= 0.70710678118654752440084436210485f;
+        }
     }
 }

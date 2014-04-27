@@ -3,10 +3,11 @@ using System.Collections;
 
 public class CostumeBuilder : MonoBehaviour {
     public enum Gender { MALE, FEMALE };
-    public enum HairColour { RED, BROWN, BLACK, BLONDE, GREY };
+    public enum HairColour { RED, BROWN, BLACK, BLONDE, GREY, BALD };
     public enum SkinColour { WHITE, BLACK };
     public enum Clothing { CASUAL, SUIT };
 
+    public KinematicBody.FacingDirection previewDirection = KinematicBody.FacingDirection.RIGHT;
     public Gender gender = Gender.MALE;
     public HairColour hairColour = HairColour.BROWN;
     public SkinColour skinColour = SkinColour.WHITE;
@@ -17,10 +18,37 @@ public class CostumeBuilder : MonoBehaviour {
     public tk2dSprite hairSprite;
 
     private CharacterAnimator characterAnimator;
+    public int animationFrame = 4;
 
     void Awake()
     {
         characterAnimator = GetComponent<CharacterAnimator>();
+    }
+
+    public void EditorUpdate()
+    {
+        switch (previewDirection)
+        {
+            case KinematicBody.FacingDirection.RIGHT:
+                animationFrame = 4;
+                SetFlip(false);
+                break;
+
+            case KinematicBody.FacingDirection.DOWN:
+                animationFrame = 6;
+                break;
+
+            case KinematicBody.FacingDirection.LEFT:
+                animationFrame = 4;
+                SetFlip(true);
+                break;
+
+            case KinematicBody.FacingDirection.UP:
+                animationFrame = 1;
+                break;
+        }
+
+        this.Update();
     }
 
     void Update()
@@ -46,10 +74,23 @@ public class CostumeBuilder : MonoBehaviour {
             case HairColour.GREY:
                 hairStr = "grey";
                 break;
+
+            case HairColour.BALD:
+                hairStr = "bald";
+                break;
         }
 
-        clothesSprite.SetSprite(genderStr + " clothes " + clothesStr + "/" + characterAnimator.animationFrame);
-        skinSprite.SetSprite(genderStr + " skin " + skinStr + "/" + characterAnimator.animationFrame);
-        hairSprite.SetSprite(genderStr + " hair " + hairStr + "/" + characterAnimator.animationFrame);
+        if (characterAnimator != null)
+            animationFrame = characterAnimator.animationFrame;
+        clothesSprite.SetSprite(genderStr + " clothes " + clothesStr + "/" + animationFrame);
+        skinSprite.SetSprite(genderStr + " skin " + skinStr + "/" + animationFrame);
+        hairSprite.SetSprite(genderStr + " hair " + hairStr + "/" + animationFrame);
+    }
+
+    public void SetFlip(bool left)
+    {
+        clothesSprite.FlipX = left;
+        skinSprite.FlipX = left;
+        hairSprite.FlipX = left;
     }
 }
