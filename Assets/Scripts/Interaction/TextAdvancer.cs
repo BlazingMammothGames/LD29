@@ -4,7 +4,7 @@ using System.Collections;
 public class TextAdvancer : MonoBehaviour {
     public bool ShouldTextBeAdvanced()
     {
-        if (Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
             return true;
         return false;
     }

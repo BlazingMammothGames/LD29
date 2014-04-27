@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections;
 
-[CustomEditor(typeof(TriggerSpeech))]
+/*[CustomEditor(typeof(TriggerSpeech))]
 public class TriggerSpeechEditor : Editor
 {
     public SerializedProperty textProp;
@@ -31,3 +31,4 @@ public class TriggerSpeechEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+*/

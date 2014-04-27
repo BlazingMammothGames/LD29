@@ -20,7 +20,6 @@ public class BlackoutTrigger : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Entered zone");
             if (renderer != null)
                 renderer.enabled = false;
             else
