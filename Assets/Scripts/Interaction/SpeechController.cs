@@ -19,6 +19,8 @@ public class SpeechController : MonoBehaviour
     private bool showingText = false;
     private bool skipUpdate = false;
 
+    public SpeechDoneTrigger speechDone;
+
     void Awake()
     {
         speech = transform.FindChild("SpeechBubble").gameObject;
@@ -60,10 +62,6 @@ public class SpeechController : MonoBehaviour
 
             DrawText();
         }
-        else
-        {
-            Debug.LogWarning("Can't do speech - not a player!");
-        }
     }
 
     void DrawText()
@@ -97,6 +95,11 @@ public class SpeechController : MonoBehaviour
                     playerControl.freezeInput = false;
                     speech.SetActive(false);
                     showingText = false;
+
+                    if (speechDone != null)
+                    {
+                        speechDone.SpeechDone(textAdvancer.gameObject);
+                    }
 
                     if (destroyOnDone)
                     {

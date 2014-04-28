@@ -5,7 +5,7 @@ public class CostumeBuilder : MonoBehaviour {
     public enum Gender { MALE, FEMALE };
     public enum HairColour { RED, BROWN, BLACK, BLONDE, GREY, BALD };
     public enum SkinColour { WHITE, BLACK };
-    public enum Clothing { CASUAL, SUIT };
+    public enum Clothing { CASUAL, SUIT, ALIEN };
 
     public KinematicBody.FacingDirection previewDirection = KinematicBody.FacingDirection.RIGHT;
     public Gender gender = Gender.MALE;
@@ -82,9 +82,21 @@ public class CostumeBuilder : MonoBehaviour {
 
         if (characterAnimator != null)
             animationFrame = characterAnimator.animationFrame;
-        clothesSprite.SetSprite(genderStr + " clothes " + clothesStr + "/" + animationFrame);
-        skinSprite.SetSprite(genderStr + " skin " + skinStr + "/" + animationFrame);
-        hairSprite.SetSprite(genderStr + " hair " + hairStr + "/" + animationFrame);
+
+        if (clothing == Clothing.ALIEN)
+        {
+            clothesSprite.SetSprite("alien/" + animationFrame);
+            skinSprite.renderer.enabled = false;
+            hairSprite.renderer.enabled = false;
+        }
+        else
+        {
+            clothesSprite.SetSprite(genderStr + " clothes " + clothesStr + "/" + animationFrame);
+            skinSprite.SetSprite(genderStr + " skin " + skinStr + "/" + animationFrame);
+            hairSprite.SetSprite(genderStr + " hair " + hairStr + "/" + animationFrame);
+            skinSprite.renderer.enabled = true;
+            hairSprite.renderer.enabled = true;
+        }
     }
 
     public void SetFlip(bool left)

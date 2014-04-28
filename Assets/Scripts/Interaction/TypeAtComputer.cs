@@ -13,6 +13,7 @@ public class TypeAtComputer : MonoBehaviour {
     public GameObject player, computer;
     private float timeCompleted = 0;
     public float timeOut = 2;
+    public List<GameObject> enableObjectsAfter = new List<GameObject>();
 
     void Awake()
     {
@@ -63,6 +64,8 @@ public class TypeAtComputer : MonoBehaviour {
             player.SetActive(true);
             player.GetComponent<TaskList>().CompleteTask("Program computer");
             computer.SetActive(false);
+            foreach (GameObject go in enableObjectsAfter)
+                if(go != null) go.SetActive(true);
         }
     }
 }
